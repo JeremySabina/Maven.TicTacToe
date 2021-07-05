@@ -11,82 +11,60 @@ public class Board {
     }
 
     public Boolean isInFavorOfX() {
+        boolean result = false;
+        for( int i = 0; i < matrix.length; i++){
+            if (matrix[i][0] == ('X') && matrix[i][1] == ('X') && matrix[i][2] == ('X')) {
+                result = true;
+            }
 
-        int countO = 0;
-        int countX = 0;
-        Character[][] board = this.matrix;
+            else if (matrix[0][i] == ('X') && matrix[1][i] == ('X') && matrix[2][i] == ('X')) {
+                result = true;
+            }
 
-        for (int nextRowIndex = 0; nextRowIndex < board.length; nextRowIndex++) {
-            for (int nextColumnIndex = 0; nextColumnIndex < board.length; nextColumnIndex++) {
-                if (board[nextRowIndex][nextColumnIndex] == 'X') {
-                    countX++;
-                } else if (board[nextRowIndex][nextColumnIndex] == 'O') {
-                    countO++;
-                }
+            else if ((matrix[0][0] == ('X') && matrix[1][1] == ('X') && matrix[2][2] == ('X'))
+                    || (matrix[0][2] == ('X') && matrix[1][1] == ('X') && matrix[2][0] == ('X'))) {
+                result = true;
             }
         }
-        return countO < countX;
-    }
+            return  result;
+        }
 
     public Boolean isInFavorOfO() {
 
-        int countO = 0;
-        int countX = 0;
-        Character[][] board = this.matrix;
+        boolean result = false;
+        for( int i = 0; i < matrix.length; i++){
+            if (matrix[i][0] == ('O') && matrix[i][1] == ('O') && matrix[i][2] == ('O')) {
+                result = true;
+            }
 
-        for (int nextRowIndex = 0; nextRowIndex < board.length; nextRowIndex++) {
-            for (int nextColumnIndex = 0; nextColumnIndex < board.length; nextColumnIndex++) {
-                if (board[nextRowIndex][nextColumnIndex] == 'X') {
-                    countX++;
-                } else if (board[nextRowIndex][nextColumnIndex] == 'O') {
-                    countO++;
-                }
+            else if (matrix[0][i] == ('O') && matrix[1][i] == ('O') && matrix[2][i] == ('O')) {
+                result = true;
+            }
+
+            else if ((matrix[0][0] == ('O') && matrix[1][1] == ('O') && matrix[2][2] == ('O'))
+                    || (matrix[0][2] == ('O') && matrix[1][1] == ('O') && matrix[2][0] == ('O'))) {
+                result = true;
             }
         }
-        return countO > countX;
-
+        return  result;
     }
 
+
     public Boolean isTie() {
+                return this.isInFavorOfX() == this.isInFavorOfO();
 
-        int countO = 0;
-        int countX = 0;
-        Character[][] board = this.matrix;
-
-        for (int nextRowIndex = 0; nextRowIndex < board.length; nextRowIndex++) {
-            for (int nextColumnIndex = 0; nextColumnIndex < board.length; nextColumnIndex++) {
-                if (board[nextRowIndex][nextColumnIndex] == 'X') {
-                    countX++;
-                } else if (board[nextRowIndex][nextColumnIndex] == 'O') {
-                    countO++;
-                }
-            }
-        }
-        return countO == countX;
     }
 
 
     public String getWinner() {
-        String winnerO = "";
-        int countO = 0;
-        int countX = 0;
-        Character[][] board = this.matrix;
-
-        for (int nextRowIndex = 0; nextRowIndex < board.length; nextRowIndex++) {
-            for (int nextColumnIndex = 0; nextColumnIndex < board.length; nextColumnIndex++) {
-                if (board[nextRowIndex][nextColumnIndex] == 'X') {
-                    countX++;
-                } else if (board[nextRowIndex][nextColumnIndex] == 'O') {
-                    countO++;
-                }
-
-            }
-        }if (countO > countX) {
-            winnerO = "O is the winner!";
-
-    } else return ("X is the winner!");
-
-
+        if(this.isInFavorOfO()) {
+                return "O";
+        } else if (this.isInFavorOfX()) {
+                return  "X";
+        } else {
+        return "";
+        }
+    }
 }
 
 
